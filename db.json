@@ -1,0 +1,10 @@
+{
+  "product": {
+    "id": 1,
+    "name": "TV de tela plana",
+    "price": 1050.55,
+    "description": "Lorem ipsum",
+    "quantity": 3,
+    "image": "https://http2.mlstatic.com/D_NQ_NP_755198-MLA40768066676_022020-O.webp"
+  }
+}
