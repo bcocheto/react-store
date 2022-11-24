@@ -8,8 +8,9 @@ import TableRow from '@mui/material/TableRow';
 import Title from '../Title';
 import { Pessoa } from '~/types/Pessoa';
 import { PessoasService } from '~/services/PessoaService';
+import { Box } from '@mui/material';
 
-export const Orders = () => {
+export const History = () => {
   const service = PessoasService;
   const [users, setUsers] = useState<Pessoa[] | undefined>([]);
 
@@ -33,16 +34,34 @@ export const Orders = () => {
       <Table size='medium'>
         <TableHead>
           <TableRow>
-            <TableCell>Data</TableCell>
+            <TableCell></TableCell>
             <TableCell>Usuário</TableCell>
-            <TableCell>Transação</TableCell>
-            <TableCell>Valor</TableCell>
+            <TableCell>Data de nascimento</TableCell>
+            <TableCell>Nome</TableCell>
+            <TableCell>CPF</TableCell>
+            <TableCell>Matrícula</TableCell>
+            <TableCell>Gênero</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {users?.map((pessoa: Pessoa) => (
             <TableRow key={pessoa.id_pessoa}>
+              <TableCell>
+                <Box
+                  component='img'
+                  sx={{
+                    height: 20,
+                    width: 20,
+                  }}
+                  alt={pessoa.nome}
+                  src={pessoa.foto}
+                />
+              </TableCell>
+              <TableCell>{pessoa.username}</TableCell>
+              <TableCell>{pessoa.nascimento}</TableCell>
               <TableCell>{pessoa.nome}</TableCell>
+              <TableCell>{pessoa.cpf}</TableCell>
+              <TableCell>{pessoa.matricula}</TableCell>
               <TableCell>{pessoa.genero}</TableCell>
             </TableRow>
           ))}

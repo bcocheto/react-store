@@ -31,11 +31,11 @@ const getById = async (id: number): Promise<any> => {
 
 const create = async (data: any): Promise<any> => {
   try {
+    console.log(data, 'data');
     const { response }: any = await Api.post(`/presenca`, data);
     if (response) {
       return response;
     }
-    return new Error('Erro ao criar presença.');
   } catch (error) {
     return new Error((error as { message: string }).message || 'Erro ao criar presença.');
   }
