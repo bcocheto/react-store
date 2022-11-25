@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,7 +7,8 @@ import TableRow from '@mui/material/TableRow';
 import Title from '../Title';
 import { Pessoa } from '~/types/Pessoa';
 import { PessoasService } from '~/services/PessoaService';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const Users = () => {
   const service = PessoasService;
@@ -28,6 +28,15 @@ export const Users = () => {
     }
   };
 
+  const handleDelete = async (id: any) => {
+    try {
+      const data = await service.deleteById(id);
+      console.log(data);
+    } catch (error) {
+      console.log('Erro: ', error);
+    }
+  };
+
   return (
     <React.Fragment>
       <Title>Usuários</Title>
@@ -37,11 +46,12 @@ export const Users = () => {
             <TableCell>Foto</TableCell>
             <TableCell>Usuário</TableCell>
             <TableCell>Matrícula</TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {users?.map((pessoa: Pessoa) => (
-            <TableRow key={pessoa.id_pessoa}>
+            <TableRow key={pessoa.id}>
               <TableCell>
                 <Box
                   component='img'
@@ -55,6 +65,14 @@ export const Users = () => {
               </TableCell>
               <TableCell>{pessoa.nome}</TableCell>
               <TableCell>{pessoa.matricula}</TableCell>
+              <TableCell>
+                <Button
+                  type='button'
+                  variant='outlined'
+                  endIcon={<DeleteIcon />}
+                  onClick={() => handleDelete(pessoa.id)}
+                />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

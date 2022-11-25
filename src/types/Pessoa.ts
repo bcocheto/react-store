@@ -1,5 +1,5 @@
 export type Pessoa = {
-  id_pessoa: number;
+  id: number;
   cpf: string;
   nome: string;
   matricula: number;

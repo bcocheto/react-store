@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { RequireAuth } from './contexts/RequireAuth';
 import { HomePage } from './pages/Home';
+import { SignInPage } from './pages/SignIn';
 import { SignUpPage } from './pages/SignUp';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           }
         />
         <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/signin' element={<SignInPage />} />
       </Routes>
     </div>
   );

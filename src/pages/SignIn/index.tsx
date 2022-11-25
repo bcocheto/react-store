@@ -28,7 +28,6 @@ export const SignInPage = () => {
       const formData = new FormData(event.currentTarget);
       const data = [...formData.entries()];
       const isLogged = await auth.signin(String(data[0][1]), String(data[1][1]));
-      console.log('islogged', isLogged);
       if (isLogged) {
         navigate('/');
       }
@@ -65,9 +64,14 @@ export const SignInPage = () => {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
+            <Box
+              component='img'
+              sx={{
+                height: 50,
+              }}
+              alt='logo'
+              src='https://universidadedevassouras.edu.br/wp-content/uploads/2021/12/logo_horizontal_univasso.svg '
+            />
             <Typography component='h1' variant='h5'>
               Login
             </Typography>

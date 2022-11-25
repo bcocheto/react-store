@@ -12,6 +12,10 @@ import { History } from '~/components/History';
 import { Presenca } from '~/components/Presenca';
 import { Pessoas } from '~/components/Pessoas';
 import { Users } from '~/components/Users';
+import { Button } from '@mui/material';
+import { AuthContext } from '~/contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -34,14 +38,44 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export const HomePage = () => {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await auth.signout();
+      navigate('/signin');
+    } catch (error) {
+      console.log('Erro: ', error);
+    }
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position='absolute'>
-        <Toolbar>
+        <Toolbar
+          sx={{
+            flexGrow: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
           <Typography component='h1' variant='h6' color='inherit' noWrap sx={{ flexGrow: 1 }}>
             Dashboard
           </Typography>
+          <Box width={100}>
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='error'
+              sx={{ mt: 3, mb: 2 }}
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
 

@@ -41,14 +41,33 @@ const create = async (data: any): Promise<any> => {
   }
 };
 
-const updateById = async (): Promise<any> => {};
-
-const deleteById = async (): Promise<any> => {};
+const update = async (data: any): Promise<any> => {
+  try {
+    const { response }: any = await Api.put(`/pessoa`, data);
+    if (response) {
+      return response;
+    }
+    return new Error('Erro ao atualizar presença.');
+  } catch (error) {
+    return new Error((error as { message: string }).message || 'Erro ao atualizar presença.');
+  }
+};
+const deleteById = async (id: string): Promise<any> => {
+  try {
+    const { response }: any = await Api.delete(`/pessoa/${id}`);
+    if (response) {
+      return response;
+    }
+    return new Error('Erro ao criar usuário.');
+  } catch (error) {
+    return new Error((error as { message: string }).message || 'Erro ao criar usuário usuário.');
+  }
+};
 
 export const PessoasService = {
   getAll,
   create,
   getById,
-  updateById,
+  update,
   deleteById,
 };
